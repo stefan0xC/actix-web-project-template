@@ -1,34 +1,30 @@
-use actix_web::{middleware, web, App, HttpServer, Result};
-use serde::Deserialize;
+mod config;
+mod handlers;
+mod models;
+mod routes;
 
-#[derive(Deserialize)]
-struct Person {
-    id: u32,
-    name: String,
-}
-
-async fn person(person: web::Path<Person>) -> Result<String> {
-    Ok(format!("Welcome {} {}!", person.name, person.id))
-}
-
-async fn index() -> &'static str {
-    "Hello world!"
-}
+use actix_web::HttpServer;
+use actix_web::App;
+use actix_web::middleware;
+use dotenv::dotenv;
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
     std::env::set_var("RUST_LOG", "actix_web=info");
+    dotenv().ok();
     env_logger::init();
+
+    let config = config::Config::from_env().unwrap();
+    let addr: String = config.server.to_string();
+
+    println!("Listening on http://{}", addr);
 
     HttpServer::new(|| {
         App::new()
-            // enable logger
             .wrap(middleware::Logger::default())
-            .service(web::resource("/index.html").to(|| async { "Hello world!" }))
-            .service(web::resource("/").to(index))
-            .route("/people/{id}/{name}", web::get().to(person),)
+            .configure(routes::routes)
     })
-    .bind("0.0.0.0:8080")?
+    .bind(addr)?
     .run()
     .await
 }
