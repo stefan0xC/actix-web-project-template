@@ -266,6 +266,7 @@ dependencies = [
  "actix-rt",
  "actix-web",
  "env_logger",
+ "serde",
 ]
 
 [[package]]
