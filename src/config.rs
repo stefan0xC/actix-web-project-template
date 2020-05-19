@@ -26,3 +26,13 @@ impl fmt::Display for ServerConfig {
         write!(f, "{}:{}", self.host, self.port)
     }
 }
+
+#[test]
+fn server_config_to_string() {
+    let server = ServerConfig {
+        host: String::from("localhost"),
+        port: 24u16,
+    };
+
+    assert_eq!("localhost:24", server.to_string());
+}
