@@ -3,9 +3,9 @@ mod handlers;
 mod models;
 mod routes;
 
-use actix_web::HttpServer;
-use actix_web::App;
 use actix_web::middleware;
+use actix_web::App;
+use actix_web::HttpServer;
 use dotenv::dotenv;
 
 #[actix_web::main]
