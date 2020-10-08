@@ -16,6 +16,8 @@ pub struct Config {
 impl Config {
     pub fn from_env() -> Result<Self, ConfigError> {
         let mut cfg = config::Config::new();
+        cfg.set_default("server.host", "localhost")?;
+        cfg.set_default("server.port", "8080")?;
         cfg.merge(config::Environment::with_prefix("ACTIX").separator("_"))?;
         cfg.try_into()
     }
