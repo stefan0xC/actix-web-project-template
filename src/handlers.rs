@@ -11,3 +11,8 @@ pub async fn person(person: web::Path<models::Person>) -> impl Responder {
 pub async fn index() -> &'static str {
     "Hello world!"
 }
+
+pub async fn echo(req_body: String) -> impl Responder {
+    info!("{}", req_body.clone());
+    web::HttpResponse::Ok().body(req_body)
+}

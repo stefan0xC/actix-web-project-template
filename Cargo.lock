@@ -269,6 +269,7 @@ dependencies = [
  "config",
  "dotenv",
  "env_logger",
+ "log",
  "serde 1.0.116",
 ]
 
