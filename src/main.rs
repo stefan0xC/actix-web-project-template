@@ -13,7 +13,7 @@ use dotenv::dotenv;
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     dotenv().ok();
-    env_logger::init();
+    env_logger::Builder::from_env(env_logger::Env::default().default_filter_or("error")).init();
 
     let config = config::Config::from_env().unwrap();
     let addr: String = config.server.to_string();
