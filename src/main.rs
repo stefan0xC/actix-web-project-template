@@ -8,7 +8,7 @@ extern crate log;
 use actix_web::middleware;
 use actix_web::App;
 use actix_web::HttpServer;
-use dotenv::dotenv;
+use dotenvy::dotenv;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {

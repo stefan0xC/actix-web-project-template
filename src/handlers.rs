@@ -1,7 +1,7 @@
 use crate::models;
+use actix_web::web;
 use actix_web::HttpResponse;
 use actix_web::Responder;
-use actix_web::web;
 
 pub async fn person(person: web::Path<models::Person>) -> impl Responder {
     let id = person.id;

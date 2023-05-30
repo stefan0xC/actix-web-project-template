@@ -18,7 +18,7 @@ impl Config {
         let cfg = config::Config::builder()
             .set_default("server.host", "localhost")?
             .set_default("server.port", "8080")?
-            .add_source(config::Environment::with_prefix("ACTIX"))
+            .add_source(config::Environment::with_prefix("ACTIX").separator("_"))
             .build()
             .unwrap();
         cfg.try_deserialize()
